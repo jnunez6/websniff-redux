@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+.button{
+  background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>List of Fields</title>
+</head>
+<body>
+<form action="/sniffapp/" method='GET'>
+            <button class="button">Return to Index</button>
+            </form>
+<h1>Fields for GW Event {{ gwevent }}</h1>
+{% for fieldobject, statement in zipped_data %}
+<li><a href="/sniffapp/{{ gwevent }}/{{ fieldobject.field }}/">{{ fieldobject.field }}</a> ({{ statement }})</li>
+{% endfor %}
+</body>
+</html>

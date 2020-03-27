@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>
+table {
+  width:100%;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+table#t01 th {
+  background-color: darkblue;
+  color: white;
+}
+table#t01 td {
+  width:100%;
+  background-color: darkblue;
+  color: white;
+}
+.button{
+  background-color: #4CAF50;
+}
+.button2 {background-color: yellow;}
+.button3 {background-color: #f44336;}
+.button4 {
+  background-color: Orange;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.button5{
+  background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>Candidates</title>
+</head>
+<body>
+<form action="/sniffapp/" method='GET'>
+            <button class="button5">Return to Index</button>
+            </form>
+<h1>List of Candidates for {{ field }}</h1>
+{% for candidate in list_of_candidates %}
+    <table id="t01">
+        {% with th_id='#'|add:candidate.candidate_id %}
+        <tr><th id=th_id>Candidate #{{ candidate.candidate_id }}</th></tr>
+        <tr><form action="/sniffapp/{{ gwevent }}/{{ field }}/{{ candidate.candidate_id }}/likely/" method='GET' target="_blank" enctype="multipart/form-data" name="certform">
+            <button class="button">Likely</button>
+            </form>
+            <form action="/sniffapp/{{ gwevent }}/{{ field }}/{{ candidate.candidate_id }}/possible/" method='GET' target="_blank">
+            <button class="button2">Possible</button>
+            </form>
+            <form action="/sniffapp/{{ gwevent }}/{{ field }}/{{ candidate.candidate_id }}/unlikely/" method='GET' target="_blank">
+            <button class="button3">Unlikely</button>
+            </form></tr>
+        {% endwith %}
+    </table>
+    <table>
+        <tr><td rowspan = "4">
+            {% load static %}
+            {% with 3pspath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.3PS.jpg" %}
+            <img src="{% static 3pspath %}">
+            </td>
+            {% endwith %}
+            <td rowspan = '4'>
+                {% with pslastpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.PSlast.jpg" %}
+                <img src="{% static pslastpath%}">
+                {% endwith %}
+            </td></tr>
+        <tr><td>ID: {{ candidate.candidate_id }}</td></tr>
+        <tr><td>RA: {{ candidate.ra }}</td></tr>
+        <tr><td>Dec: {{ candidate.dec }}</td></tr>
+    </table>
+        <table>
+        <tr>
+            <td>
+            {% load static %}
+            {% with all_difflcpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".all_difflc.png" %}
+            <img src="{% static all_difflcpath %}" style="width:350px;height:300px;">
+                {% endwith %}
+            {% load static %}
+            {% with xypath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".xy.png" %}
+            <img src="{% static xypath %}" style="width:300px;height:300px;">
+                {% endwith %}
+            </td>
+            <td>
+            {% load static %}
+            {% with difflcunforcedpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".difflc.unforced.png" %}
+            <img src="{% static difflcunforcedpath %}" style="width:350px;height:300px;">
+                {% endwith %}
+            {% load static %}
+            {% with difflcforcedpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".difflc.forced.png" %}
+            <img src="{% static difflcforcedpath %}" style="width:350px;height:300px;">
+                {% endwith %}
+            </td>
+        </tr>
+    </table>
+    <br>
+{% endfor %}
+</body>
+<form action="/sniffapp/{{ gwevent }}/" method='GET'>
+            <button class="button4">Return to Fields in {{ gwevent }}</button>
+            </form>
+</html>
