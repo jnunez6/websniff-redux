@@ -92,6 +92,7 @@ def likelycandidates(request):
     context = {'list_of_snrcandidates': likelycandidates}
     return render(request, 'sniffapp/likelycandidates.html', context)
 
+
 def likelyvote(request, gwevent, field_name, candidate_id):
     candidate = GWCandidate.objects.get(field__field=field_name, gwevent__gwevent=gwevent,
                                         candidate_id=candidate_id)
