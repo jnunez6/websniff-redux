@@ -6,6 +6,12 @@ urlpatterns = [
 
     path('', views.index, name='index'),
 
+    path('firstpush/', views.firstpush, name='First Push'),
+
+    path('secondpush/', views.secondpush, name='Second Push'),
+
+    path('likelycandidates/', views.likelycandidates, name='Likely Candidates'),
+
     path('results/', views.results, name='results'),
 
     path('<gwevent>/', views.fields, name='fields'),

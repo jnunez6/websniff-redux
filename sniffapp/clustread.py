@@ -77,7 +77,7 @@ def clustload(path_to_folder):
         fieldforfile.save()
         for i in range(len(clustfile.RAaverage)):
             cand = GWCandidate(ra=clustfile.RAaverage[i], dec=clustfile.DECaverage[i], candidate_id=clustfile.ID[i],
-                               imagedir=clustfile.imagedir, field=fieldforfile, gwevent=gweventforfile)
+                               imagedir=clustfile.imagedir, field=fieldforfile, gwevent=gweventforfile, snr=clustfile.SNRave[i])
             cand.save()
 
 

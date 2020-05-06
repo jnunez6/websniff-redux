@@ -22,5 +22,6 @@ class GWCandidate(models.Model):
     percentpossible = models.FloatField(default=0)
     field = models.ForeignKey(GWfield, on_delete=models.CASCADE, blank=True, null=True)
     gwevent = models.ForeignKey(GWevent, on_delete=models.CASCADE, blank=True, null=True)
+    snr = models.FloatField(default=0)
 
 

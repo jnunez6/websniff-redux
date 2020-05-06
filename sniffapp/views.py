@@ -54,7 +54,7 @@ def fields(request, gwevent):
 
 
 def candidates(request, gwevent, field_name):
-    list_of_candidates = GWCandidate.objects.filter(field__field=field_name)
+    list_of_candidates = GWCandidate.objects.filter(field__field=field_name).order_by('-snr')
     context = {'list_of_candidates': list_of_candidates,
                'field': field_name,
                'gwevent': gwevent,
@@ -62,24 +62,44 @@ def candidates(request, gwevent, field_name):
     return render(request, 'sniffapp/candidates.html', context)
 
 
+def firstpush(request):
+    list_of_snrcandidates = GWCandidate.objects.all().order_by('-snr')[:50]
+    novotecandidates = []
+    for cand in list_of_snrcandidates:
+        votesum = cand.likelyvote + cand.unlikelyvote
+        if votesum <= 0:
+            novotecandidates.append(cand)
+    context = {'list_of_snrcandidates': novotecandidates}
+    return render(request, 'sniffapp/firstpush.html', context)
+
+
+def secondpush(request):
+    list_of_snrcandidates = GWCandidate.objects.all().order_by('-snr')
+    likelycandidates = []
+    for cand in list_of_snrcandidates:
+        if cand.likelyvote == 1:
+            likelycandidates.append(cand)
+    context = {'list_of_snrcandidates': likelycandidates}
+    return render(request, 'sniffapp/secondpush.html', context)
+
+
+def likelycandidates(request):
+    list_of_snrcandidates = GWCandidate.objects.all().order_by('-snr')
+    likelycandidates = []
+    for cand in list_of_snrcandidates:
+        if cand.likelyvote >= 2:
+            likelycandidates.append(cand)
+    context = {'list_of_snrcandidates': likelycandidates}
+    return render(request, 'sniffapp/likelycandidates.html', context)
+
 def likelyvote(request, gwevent, field_name, candidate_id):
     candidate = GWCandidate.objects.get(field__field=field_name, gwevent__gwevent=gwevent,
                                         candidate_id=candidate_id)
     candidate.likelyvote += 1
     candidate.save()
     data = {
-        'message': "Successfully submitted form data.", }
+        'message': "Successfully submitted push vote.", }
     return JsonResponse(data)
-
-#def likelyvote(request):
-    #if request.method == 'POST':
-        #form = VoteCounterForm(request.POST)
-        #if form.is_valid():
-            #candidate = GWCandidate.objects.filter(field__field=form.data['field'], gwevent__gwevent=form.data['gwevent'],
-                                                   #candidate_id=form.data['candidate_id'])
-            #candidate.likelyvote += 1
-            #candidate.save()
-    #return redirect('candidates')
 
 
 def possiblevote(request, gwevent, field_name, candidate_id):
@@ -98,5 +118,5 @@ def unlikelyvote(request, gwevent, field_name, candidate_id):
     candidate.unlikelyvote += 1
     candidate.save()
     data = {
-        'message': "Successfully submitted form data.", }
+        'message': "Successfully submitted veto vote.", }
     return JsonResponse(data)
