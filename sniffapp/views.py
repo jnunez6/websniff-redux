@@ -63,13 +63,13 @@ def candidates(request, gwevent, field_name):
 
 
 def firstpush(request):
-    list_of_snrcandidates = GWCandidate.objects.all().order_by('-snr')[:50]
+    list_of_snrcandidates = GWCandidate.objects.all().order_by('-snr')
     novotecandidates = []
     for cand in list_of_snrcandidates:
         votesum = cand.likelyvote + cand.unlikelyvote
         if votesum <= 0:
             novotecandidates.append(cand)
-    context = {'list_of_snrcandidates': novotecandidates}
+    context = {'list_of_snrcandidates': novotecandidates[:50]}
     return render(request, 'sniffapp/firstpush.html', context)
 
 
@@ -77,8 +77,9 @@ def secondpush(request):
     list_of_snrcandidates = GWCandidate.objects.all().order_by('-snr')
     likelycandidates = []
     for cand in list_of_snrcandidates:
-        if cand.likelyvote == 1:
+        if cand.likelyvote == 1 and cand.unlikelyvote == 0:
             likelycandidates.append(cand)
+
     context = {'list_of_snrcandidates': likelycandidates}
     return render(request, 'sniffapp/secondpush.html', context)
 
@@ -87,7 +88,7 @@ def likelycandidates(request):
     list_of_snrcandidates = GWCandidate.objects.all().order_by('-snr')
     likelycandidates = []
     for cand in list_of_snrcandidates:
-        if cand.likelyvote >= 2:
+        if cand.likelyvote >= 2 and cand.unlikelyvote == 0:
             likelycandidates.append(cand)
     context = {'list_of_snrcandidates': likelycandidates}
     return render(request, 'sniffapp/likelycandidates.html', context)
