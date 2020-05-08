@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+.button{
+  background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>Likely Results</title>
+</head>
+<body>
+<form action="/sniffapp/" method='GET'>
+            <button class="button">Return to Index</button>
+            </form>
+<h1>Likely Candidates</h1>
+<table><tr>
+    <td>Event</td>
+    <td>Field</td>
+    <td>Candidate ID</td>
+    <td>RA</td>
+    <td>Dec</td>
+    <td>Percentage of Likely Vote</td>
+</tr>
+    {% for candidate in likelylist %}
+    <tr>
+        <td>{{ candidate.gwevent.gwevent }}</td>
+        <td><a href="/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}">{{ candidate.field.field }}</a></td>
+        <td>{{ candidate.candidate_id }}</td>
+        <td>{{ candidate.ra }}</td>
+        <td>{{ candidate.dec }}</td>
+        <td>{{ candidate.percentlikely }}%</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<h1>Possible Candidates</h1>
+<table><tr>
+    <td>Event</td>
+    <td>Field</td>
+    <td>Candidate ID</td>
+    <td>RA</td>
+    <td>Dec</td>
+    <td>Percentage of Possible Vote</td>
+</tr>
+    {% for candidate in possiblelist %}
+    <tr>
+        <td>{{ candidate.gwevent.gwevent }}</td>
+        <td><a href="/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}">{{ candidate.field.field }}</a></td>
+        <td>{{ candidate.candidate_id }}</td>
+        <td>{{ candidate.ra }}</td>
+        <td>{{ candidate.dec }}</td>
+        <td>{{ candidate.percentpossible }}%</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
