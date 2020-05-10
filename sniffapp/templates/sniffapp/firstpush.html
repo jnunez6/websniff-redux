@@ -51,7 +51,7 @@ table#t01 td {
     <title>Candidates To Sniff</title>
 </head>
 <body>
-<form action="/sniffapp/" method='GET'>
+<form action="/websniff/sniffapp/" method='GET'>
             <button class="button5">Return to Index</button>
             </form>
 <h1>List of Voteless Candidates (Ordered by SNR)</h1>
@@ -63,10 +63,10 @@ table#t01 td {
             </th>
         </tr>
         <tr>
-            <form action="/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}/{{ candidate.candidate_id }}/likely/" method='GET' target="_blank" enctype="multipart/form-data" name="certform">
+            <form action="/websniff/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}/{{ candidate.candidate_id }}/likely/" method='GET' target="_blank" enctype="multipart/form-data" name="certform">
                 <button class="button">Push</button>
             </form>
-            <form action="/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}/{{ candidate.candidate_id }}/unlikely/" method='GET' target="_blank" enctype="multipart/form-data" name="certform">
+            <form action="/websniff/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}/{{ candidate.candidate_id }}/unlikely/" method='GET' target="_blank" enctype="multipart/form-data" name="certform">
                 <button class="button3">Veto</button>
             </form>
         </tr>
@@ -125,7 +125,7 @@ table#t01 td {
     </table>
     <br>
 {% endfor %}
-<form action="/sniffapp/" method='GET'>
+<form action="/websniff/sniffapp/" method='GET'>
     <button class="button5">Return to Index</button>
 </form>
 </body>
