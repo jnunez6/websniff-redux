@@ -25,7 +25,7 @@ SECRET_KEY = '5*=mj*gvzpne0e5%x49ejqb9df*!^_fabuj+-fsknu526m&5sn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,11 +77,17 @@ WSGI_APPLICATION = 'websniff.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'database': 'SNIFFDB',
-            'user': 'root',
-            'password': 'JN42696$$$'
-        }
+        'NAME': 'SNIFFDB',
+		'USER': 'django',
+		'PASSWORD': '4Django!',
+		'HOST': '127.0.0.1',
+		'PORT': '3306',
+		'OPTIONS': {'ssl': {'ssl_disabled': True}}
+        #'OPTIONS': {
+        #    'database': 'SNIFFDB',
+        #    'user': 'django',
+        #    'password': '4django!' #JN42696$$$'
+        #}
     }
 }
 
