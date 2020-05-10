@@ -5,7 +5,13 @@ from django.http import JsonResponse
 
 def index(request):
     gwevent_list = GWevent.objects.order_by('gwevent')
-    context = {'gwevent_list': gwevent_list}
+    list_of_snrcandidates = GWCandidate.objects.all()
+    likelycandidates = []
+    for cand in list_of_snrcandidates:
+        if cand.likelyvote >= 2 and cand.unlikelyvote == 0:
+            likelycandidates.append(cand)
+    context = {'gwevent_list': gwevent_list,
+               'likelycandidates': likelycandidates[:5]}
     return render(request, 'sniffapp/index.html', context)
 
 

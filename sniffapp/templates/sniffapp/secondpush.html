@@ -57,52 +57,68 @@ table#t01 td {
 <h1>List of Pushed Candidates (Ordered by SNR)</h1>
 {% for candidate in list_of_snrcandidates %}
     <table id="t01">
-        <tr><th>Candidate ID #{{ candidate.candidate_id }}, Field: {{ candidate.field.field }}, GWEvent: {{ candidate.gwevent.gwevent }}</th></tr>
-        <tr><form action="/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}/{{ candidate.candidate_id }}/likely/" method='GET' target="_blank" enctype="multipart/form-data" name="certform">
-            <button class="button">Push</button>
+        <tr>
+            <th>
+                Candidate ID #{{ candidate.candidate_id }}, Field: {{ candidate.field.field }}, GWEvent: {{ candidate.gwevent.gwevent }}
+            </th>
+        </tr>
+        <tr>
+            <form action="/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}/{{ candidate.candidate_id }}/likely/" method='GET' target="_blank" enctype="multipart/form-data" name="certform">
+                <button class="button">Push</button>
             </form>
             <form action="/sniffapp/{{ candidate.gwevent.gwevent }}/{{ candidate.field.field }}/{{ candidate.candidate_id }}/unlikely/" method='GET' target="_blank" enctype="multipart/form-data" name="certform">
-            <button class="button3">Veto</button>
+                <button class="button3">Veto</button>
             </form>
-            </tr>
+        </tr>
     </table>
     <table>
-        <tr><td>SNR: {{ candidate.snr }}</td>
-        <td rowspan="4">
-            {% load static %}
-            {% with 3pspath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.3PS.jpg" %}
-            <img src="{% static 3pspath %}">
-            </td>
-            {% endwith %}
-        <td rowspan="4">
-            {% with pslastpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.PSlast.jpg" %}
-            <img src="{% static pslastpath%}">
-            {% endwith %}
-            </td>
-        </tr>
-        <tr><td>RA: {{ candidate.ra }}</td></tr>
-        <tr><td>Dec: {{ candidate.dec }}</td></tr>
-    </table>
-        <table>
         <tr>
             <td>
-            {% load static %}
-            {% with all_difflcpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".all_difflc.png" %}
-            <img src="{% static all_difflcpath %}" style="width:350px;height:300px;">
+                SNR: {{ candidate.snr }}
+            </td>
+            <td rowspan="4">
+                {% load static %}
+                {% with 3pspath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.3PS.jpg" %}
+                <img src="{% static 3pspath %}">
+            </td>
                 {% endwith %}
-            {% load static %}
-            {% with xypath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".xy.png" %}
-            <img src="{% static xypath %}" style="width:300px;height:300px;">
+            <td rowspan="4">
+                {% with pslastpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.PSlast.jpg" %}
+                <img src="{% static pslastpath%}">
+                {% endwith %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                RA: {{ candidate.ra }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Dec: {{ candidate.dec }}
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                {% load static %}
+                {% with all_difflcpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".all_difflc.png" %}
+                <img src="{% static all_difflcpath %}" style="width:350px;height:300px;">
+                {% endwith %}
+                {% load static %}
+                {% with xypath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".xy.png" %}
+                <img src="{% static xypath %}" style="width:300px;height:300px;">
                 {% endwith %}
             </td>
             <td>
-            {% load static %}
-            {% with difflcunforcedpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".difflc.unforced.png" %}
-            <img src="{% static difflcunforcedpath %}" style="width:350px;height:300px;">
+                {% load static %}
+                {% with difflcunforcedpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".difflc.unforced.png" %}
+                <img src="{% static difflcunforcedpath %}" style="width:350px;height:300px;">
                 {% endwith %}
-            {% load static %}
-            {% with difflcforcedpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".difflc.forced.png" %}
-            <img src="{% static difflcforcedpath %}" style="width:350px;height:300px;">
+                {% load static %}
+                {% with difflcforcedpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".difflc.forced.png" %}
+                <img src="{% static difflcforcedpath %}" style="width:350px;height:300px;">
                 {% endwith %}
             </td>
         </tr>
@@ -110,7 +126,7 @@ table#t01 td {
     <br>
 {% endfor %}
 <form action="/sniffapp/" method='GET'>
-            <button class="button5">Return to Index</button>
-            </form>
+    <button class="button5">Return to Index</button>
+</form>
 </body>
 </html>

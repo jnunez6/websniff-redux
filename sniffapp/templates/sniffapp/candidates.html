@@ -66,21 +66,26 @@ table#t01 td {
         {% endwith %}
     </table>
     <table>
-        <tr><td>ID: {{ candidate.candidate_id }}</td>
-        <td rowspan="4">
-            {% load static %}
-            {% with 3pspath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.3PS.jpg" %}
-            <img src="{% static 3pspath %}">
+        <tr>
+            <td>ID: {{ candidate.candidate_id }}</td>
+            <td rowspan="4">
+                {% load static %}
+                {% with 3pspath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.3PS.jpg" %}
+                <img src="{% static 3pspath %}">
             </td>
-            {% endwith %}
-        <td rowspan="4">
-            {% with pslastpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.PSlast.jpg" %}
-            <img src="{% static pslastpath%}">
-            {% endwith %}
+                {% endwith %}
+            <td rowspan="4">
+                {% with pslastpath="gw190814_gw190814tmpl/1/"|add:candidate.imagedir|add:"/"|add:candidate.imagedir|add:"_cand"|add:candidate.candidate_id|add:".r.PSlast.jpg" %}
+                <img src="{% static pslastpath%}">
+                {% endwith %}
             </td>
         </tr>
-        <tr><td>RA: {{ candidate.ra }}</td></tr>
-        <tr><td>Dec: {{ candidate.dec }}</td></tr>
+        <tr>
+            <td>RA: {{ candidate.ra }}</td>
+        </tr>
+        <tr>
+            <td>Dec: {{ candidate.dec }}</td>
+        </tr>
     </table>
         <table>
         <tr>
